@@ -19,5 +19,12 @@ export GIT_EDITOR="sed -i '/Signed-off-by:.*/d' .git/COMMIT_EDITMSG"
 fi
 
 git cherry-pick "$@" -e
-export GIT_EDITOR=$EMPTABLE_EDITOR
+
+if [ -z "$EMPTABLE_EDITOR" ]
+then
+    unset GIT_EDITOR
+else
+    PREV_EDITOR=$GIT_EDITOR
+fi
+
 }
